@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location = "products.html";
   });
 
-  document.getElementById("cerrar-sesion").addEventListener("click", () => {
+  document.getElementById("btn-logout").addEventListener("click", () => {
     localStorage.removeItem("loggedIn");
     window.location.href = "login.html";
   });

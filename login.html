@@ -35,9 +35,27 @@
     <main class="mt-5">
       <div class="container">
         <form id="loginForm">
-          <input type="text" name="usuario" id="usuario" placeholder="Usuario" required />
-          <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required />
-          <button type="submit" id="btn">Ingresar</button>
+          <div>
+            <label for="usuario">Usuario</label>
+            <input
+              type="text"
+              name="usuario"
+              id="usuario"
+              placeholder="Usuario"
+              required
+            />
+          </div>
+          <div>
+            <label for="contrasena">Contraseña</label>
+            <input
+              type="password"
+              name="contrasena"
+              id="contrasena"
+              placeholder="Contraseña"
+              required
+            />
+          </div>
+          <button type="submit" id="btn-login">Iniciar sesión</button>
         </form>
       </div>
     </main>
