@@ -1,0 +1,50 @@
+/* Estilo para el contenedor principal de la lista */
+#lista {
+  display: block;
+  width: 100%;
+  overflow-x: auto; /* Permite scroll horizontal si es necesario */
+  white-space: nowrap; /* Evita que los elementos se rompan en varias líneas */
+  padding: 10px 0;
+  -webkit-overflow-scrolling: touch; /* Mejor scroll en dispositivos móviles */
+}
+
+/* Estilo para cada elemento de la lista */
+.listaP {
+  display: inline-block; /* Hace que los elementos se alineen horizontalmente */
+  width: 200px; /* Ancho fijo para cada producto */
+  margin-right: 15px; /* Espacio entre productos */
+  vertical-align: top; /* Alinea los elementos en la parte superior */
+  white-space: normal; /* Permite que el contenido interno se ajuste */
+}
+
+/* Estilo para el contenedor del producto */
+.producto {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  height: 100%;
+  box-sizing: border-box;
+  transition: transform 0.2s;
+}
+
+.producto:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.producto img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.producto div {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.producto div:last-child {
+  font-weight: bold;
+  color: #333;
+}
