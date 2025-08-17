@@ -20,6 +20,13 @@
         background-color: rgb(248, 249, 250);
       }
     </style>
+
+    <script>
+      // Verificar si el usuario está logueado, en caso de sí, se redirige automáticamente al index
+      if (localStorage.getItem("loggedIn") === "true") {
+        window.location.href = "index.html";
+      }
+    </script>
   </head>
 
   <body>
