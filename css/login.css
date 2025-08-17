@@ -6,10 +6,11 @@ h1 {
 }
 
 main {
-    border: solid;
     width: min(90%, 500px);
     margin: auto;
     height: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 .container {
     width: 100%;
@@ -18,8 +19,8 @@ main {
 }
 
 #loginForm {
-    width: 70%;
-    margin:  0 auto;
+    width: 95%;
+    margin:  auto;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -32,4 +33,11 @@ main {
     padding: 1rem;
     border-radius: 5px;
     border: 2px solid rgb(197, 197, 197);
+}
+
+#btn-login {
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(45, 45, 45);
+    padding: 0.5rem;
 }
