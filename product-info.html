@@ -10,6 +10,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link href="css/style-popup.css" rel="stylesheet">
 </head>
 
 <body>
@@ -37,9 +38,43 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <div class="popup">
+      <div class="popup-contenido">
+        <!-- imagen -->
+        <div class="popup-img">
+          <img id="producto-imagen" src="" alt="Producto">
+          <button class="fav-btn">❤</button>
+        </div>
+
+        <!--info-->
+        <div class="popup-info">
+          <h2 id="producto-nombre"></h2>
+          <span id="producto-tag" class="tag"></span>
+        <p id="producto-precio" class="price"></p>
+        <p id="producto-vendidos" class="sold"></p>
+
+        <div class="options">
+          <label>Modelo
+            <select>
+              <option>Value</option>
+            </select>
+          </label>
+
+          <label>Color
+            <select>
+              <option>Value</option>
+            </select>
+          </label>
+        </div>
+
+        <button class="buy-btn">Comprar</button>
+
+        <details>
+          <summary>Descripción</summary>
+          <p id="producto-descripcion"></p>
+        </details>
+
+        </div>
       </div>
     </div>
   </main>
