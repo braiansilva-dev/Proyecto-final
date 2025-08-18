@@ -1,3 +1,4 @@
+/*
 // Función para obtener parámetros de la URL
 function obtenerParametroURL(nombre) {
     const urlParams = new URLSearchParams(window.location.search);
@@ -100,3 +101,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+*/

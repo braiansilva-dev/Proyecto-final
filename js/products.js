@@ -37,7 +37,7 @@ async function datos(url) {
                                 <!-- Info del producto -->
                                 <div class="popup-info">
                                     <h2 id="producto-nombre">${element.name}</h2>
-                                    <span id="producto-tag" class="tag">${element.category || "Sin categoría"}</span>
+                                    <span id="producto-tag" class="tag">${element.category || "Autos"}</span>
                                     <p id="producto-precio" class="price">${element.currency} ${element.cost}</p>
                                     <p id="producto-vendidos" class="sold">${element.soldCount || 0} vendidos</p>
 
