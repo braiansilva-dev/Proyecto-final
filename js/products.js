@@ -23,8 +23,60 @@ async function datos(url) {
             
             // AGREGAR CLICK HANDLER PARA NAVEGACIÓN
             div.addEventListener("click", () => {
-                // Redirigir a product-info.html con el ID del producto
-                window.location.href = `product-info.html?id=${element.id}`;
+                Swal.fire({
+                    title: "", // Lo dejamos vacío porque usaremos HTML personalizado
+                    html: `
+                        <div class="popup">
+                            <div class="popup-contenido">
+                                <!-- Imagen y botón favorito -->
+                                <div class="popup-img">
+                                    <img id="producto-imagen" src="${element.image}" alt="${element.name}" />
+                                    <button class="fav-btn">❤</button>
+                                </div>
+
+                                <!-- Info del producto -->
+                                <div class="popup-info">
+                                    <h2 id="producto-nombre">${element.name}</h2>
+                                    <span id="producto-tag" class="tag">${element.category || "Sin categoría"}</span>
+                                    <p id="producto-precio" class="price">${element.currency} ${element.cost}</p>
+                                    <p id="producto-vendidos" class="sold">${element.soldCount || 0} vendidos</p>
+
+                                    <!-- Selectores (opciones) -->
+                                    <div class="options">
+                                        <label>
+                                            Modelo
+                                            <select>
+                                                <option>Standard</option>
+                                                ${element.relatedProducts?.map(prod => `<option>${prod.name}</option>`).join('') || ''}
+                                            </select>
+                                        </label>
+                                        <label>
+                                            Color
+                                            <select>
+                                                <option>Negro</option>
+                                                <option>Blanco</option>
+                                            </select>
+                                        </label>
+                                    </div>
+
+                                    <!-- Botón de compra -->
+                                    <button class="buy-btn">Comprar</button>
+
+                                    <!-- Descripción (acordeón) -->
+                                    <details>
+                                        <summary>Descripción</summary>
+                                        <p id="producto-descripcion">${element.description || "No hay descripción disponible."}</p>
+                                    </details>
+                                </div>
+                            </div>
+                        </div>
+                    `,
+                    showConfirmButton: false, // Ocultamos el botón por defecto de SweetAlert
+                    width: "70%", // Ancho personalizado
+                    padding: "0", // Eliminamos el padding para que no interfiera con nuestros estilos
+                    background: "#fff", // Fondo blanco
+                    
+                });
             });
 
             // Imagen
