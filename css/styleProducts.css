@@ -51,6 +51,7 @@
 
 
 
+
 #productDialog {
     width: 80%;
     max-width: 800px;
@@ -79,4 +80,7 @@
   margin-bottom: 5%;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
+.catalogo__titulo {
+  text-align: center;
+  padding: 4rem;
 }
