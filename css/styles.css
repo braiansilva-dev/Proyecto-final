@@ -188,3 +188,14 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+#btn-logout {
+  display: block;
+  border: none;
+  border-radius: 5px;
+  padding: .5rem;
+  transition: background-color .2s ease;
+}
+#btn-logout:hover {
+  background-color: rgb(200, 200, 200);
+}

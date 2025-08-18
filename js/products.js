@@ -51,3 +51,8 @@ async function datos(url) {
 // Llamada a la función
 datos(url);
 
+document.getElementById("btn-logout").addEventListener("click", () => {
+  localStorage.removeItem("loggedIn");
+  localStorage.setItem("logoutMessage", "true");
+  window.location.href = "login.html";
+});
