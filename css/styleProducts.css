@@ -48,3 +48,8 @@
   font-weight: bold;
   color: #333;
 }
+
+.catalogo__titulo {
+  text-align: center;
+  padding: 4rem;
+}
