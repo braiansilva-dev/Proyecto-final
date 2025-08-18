@@ -87,3 +87,16 @@ document.getElementById("btn-logout").addEventListener("click", () => {
   localStorage.setItem("logoutMessage", "true");
   window.location.href = "login.html";
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Cargar producto
+    cargarProducto();
+    
+    // Event listener para el botón volver
+    const btnVolver = document.getElementById("btn-volver");
+    if (btnVolver) {
+        btnVolver.addEventListener("click", function() {
+            window.location.href = "products.html";
+        });
+    }
+});
