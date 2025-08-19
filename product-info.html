@@ -16,12 +16,7 @@
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/style-popup.css" rel="stylesheet" />
 
-    <script>
-      // Si no está logueado, se redirige a la página login
-      if (localStorage.getItem("loggedIn") !== "true") {
-        window.location.href = "login.html";
-      }
-    </script>
+    <script src="js/auth.js"></script>
   </head>
 
   <body>
@@ -56,9 +51,7 @@
         </div>
       </div>
     </nav>
-    <main>
-      
-    </main>
+    <main></main>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/product-info.js"></script>

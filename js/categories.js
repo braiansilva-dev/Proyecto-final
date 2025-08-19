@@ -114,12 +114,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
     }
   });
 
-  document.getElementById("btn-logout").addEventListener("click", () => {
-    localStorage.removeItem("loggedIn");
-    localStorage.setItem("logoutMessage", "true");
-    window.location.href = "login.html";
-  });
-
   document.getElementById("sortAsc").addEventListener("click", function () {
     sortAndShowCategories(ORDER_ASC_BY_NAME);
   });

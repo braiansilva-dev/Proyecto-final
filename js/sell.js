@@ -32,12 +32,6 @@ function updateTotalCosts() {
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
-  document.getElementById("btn-logout").addEventListener("click", () => {
-    localStorage.removeItem("loggedIn");
-    localStorage.setItem("logoutMessage", "true");
-    window.location.href = "login.html";
-  });
-
   document
     .getElementById("productCountInput")
     .addEventListener("change", function () {

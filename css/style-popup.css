@@ -4,23 +4,24 @@ body {
 }
 
 .popup {
+  width: 100%;
   max-width: 1500px;
-  margin: 50px auto;  
+  margin: auto;
   background: #fff;
   border-radius: 10px;
-  padding: 20px;
 }
 
 .popup-contenido {
   display: flex;
   flex-direction: row;
-  gap: 30px;
   align-items: center;
+  justify-content: center;
+  gap: calc(1.6em + 1rem);
 }
 
 .popup-img {
   position: relative;
-  flex: 0 0 auto;
+  flex: 0 1 auto;
   width: 750px; 
 }
 
@@ -46,15 +47,25 @@ body {
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color .3s ease, background .3s ease;
 }
 
 .fav-btn:hover {
+  color: rgba(255, 0, 0, .5);
+  background: rgba(255, 255, 255, 1);
+}
+#fav:checked + .fav-btn {
+  color: rgb(255, 0, 0);
   background: rgba(255, 255, 255, 1);
 }
 
 /* INFORMACIÓN */
 .popup-info {
-  flex: 1;
+  max-width: 300px;
+  flex: 1 1 auto;
   padding: 10px 0;
 }
 
@@ -89,7 +100,9 @@ body {
 
 .options {
   display: flex;
-  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
   margin: 20px 0;
 }
 
@@ -149,6 +162,7 @@ details p {
   padding: 15px 0;
   line-height: 1.5;
   color: #555;
+  margin: 0;
 }
 
 .btn {

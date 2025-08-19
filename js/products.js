@@ -1,4 +1,4 @@
-const url = "https://japceibal.github.io/emercado-api/cats_products/101.json";
+const url = `https://japceibal.github.io/emercado-api/cats_products/101.json`;
 const lista = document.getElementById("lista");
 
 let productos = [];
@@ -31,7 +31,10 @@ async function datos(url) {
                                 <!-- Imagen y botón favorito -->
                                 <div class="popup-img">
                                     <img id="producto-imagen" src="${element.image}" alt="${element.name}" />
-                                    <button class="fav-btn">❤</button>
+                                    <input type="checkbox" style="display: none;" id="fav">
+                                    <label for="fav" class="fav-btn">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </label>
                                 </div>
 
                                 <!-- Info del producto -->
@@ -72,8 +75,9 @@ async function datos(url) {
                         </div>
                     `,
                     showConfirmButton: false, // Ocultamos el botón por defecto de SweetAlert
-                    width: "70%", // Ancho personalizado
-                    padding: "0", // Eliminamos el padding para que no interfiera con nuestros estilos
+                    showCloseButton: true, // Agregamos el botón de cierre 'x'
+                    width: "auto", // Ancho automático
+                    padding: "1rem", // Padding personalizado
                     background: "#fff", // Fondo blanco
                     
                 });
@@ -107,15 +111,15 @@ async function datos(url) {
         });
 
     } else {
+        swal.fire({
+            title: "Error",
+            text: "No se pudieron cargar los productos",
+            icon: "error",
+            confirmButtonText: "Aceptar"
+        })
         console.error("Error: " + response.status);
     }
 }
 
 // Llamada a la función
 datos(url);
-
-document.getElementById("btn-logout").addEventListener("click", () => {
-  localStorage.removeItem("loggedIn");
-  localStorage.setItem("logoutMessage", "true");
-  window.location.href = "login.html";
-});
