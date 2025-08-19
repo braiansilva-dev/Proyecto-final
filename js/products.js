@@ -2,13 +2,15 @@ const url = `https://japceibal.github.io/emercado-api/cats_products/101.json`;
 const lista = document.getElementById("lista");
 
 let productos = [];
+let category = "";
 
 async function datos(url) {
     let response = await fetch(url);
 
     if (response.ok) {
         let data = await response.json();  
-        productos = data.products; 
+        productos = data.products;
+        category = data.catName;
 
         productos.forEach(element => {
             // Contenedor del producto
@@ -40,7 +42,7 @@ async function datos(url) {
                                 <!-- Info del producto -->
                                 <div class="popup-info">
                                     <h2 id="producto-nombre">${element.name}</h2>
-                                    <span id="producto-tag" class="tag">${element.category || "Autos"}</span>
+                                    <span id="producto-tag" class="tag">${category || "Categoría desconocida"}</span>
                                     <p id="producto-precio" class="price">${element.currency} ${element.cost}</p>
                                     <p id="producto-vendidos" class="sold">${element.soldCount || 0} vendidos</p>
 
@@ -107,7 +109,9 @@ async function datos(url) {
             li.appendChild(div);
 
             // Agregar al HTML
-            lista.appendChild(li);  
+            lista.appendChild(li);
+
+            document.getElementById("Catalogo").textContent = `Catálogo de ${category}` || "Catálogo";
         });
 
     } else {
