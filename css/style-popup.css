@@ -168,3 +168,24 @@ details p {
 .btn {
   margin-top: 2rem;
 }
+
+
+@media (max-width: 768px) {
+  .popup-contenido {
+    flex-direction: column;
+  }
+  .popup-img {
+    width: 100%;
+  }
+  .popup-info {
+    width: 100%;
+    max-width: 100%;
+  }
+  .options {
+    justify-content: space-evenly;
+    gap: 1rem;
+  }
+  #swal2-html-container {
+    padding: 0;
+  }
+}
