@@ -24,15 +24,19 @@ loginForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const usuarioValido = /[a-zA-Z0-9._-]{3,}/;
-
   const passwordValida = /[a-zA-Z0-9._-]{6,}/;
 
   const user = document.getElementById("usuario").value;
   const pass = document.getElementById("contrasena").value;
 
   if (usuarioValido.test(user) && passwordValida.test(pass)) {
+    // Guardamos en localStorage
     localStorage.setItem("loggedIn", "true");
+    localStorage.setItem("username", user);
+
     showToast("Sesión iniciada correctamente", "success");
+
+    // Redirigimos después de 1.5s
     setTimeout(() => {
       window.location.href = "index.html";
     }, 1500);
@@ -40,3 +44,4 @@ loginForm.addEventListener("submit", (event) => {
     showToast("Usuario o contraseña incorrectos", "error");
   }
 });
+
