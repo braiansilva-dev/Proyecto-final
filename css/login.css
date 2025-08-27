@@ -10,9 +10,8 @@ main {
   background-color: white;
   width: min(90%, 500px);
   height: fit-content !important;
-  min-height: auto;
+  min-height: auto !important;
   margin: auto;
-  height: 400px;
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
