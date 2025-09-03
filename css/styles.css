@@ -211,3 +211,26 @@ a.custom-card:hover {
 .buscador {
   width: 85%;
 }
+
+@media (max-width: 480px) {
+    .buscador {
+      width: 30% !important;
+    }
+    .form-control{
+      font-size: 12px !important;
+    }
+    .font-size {
+      font-size: 14px !important;
+    }
+    .flex {
+      display: flex;
+      flex-direction: column;
+      gap: 1.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .buscador {
+      width:60% !important;
+    }
+}
