@@ -199,3 +199,15 @@ a.custom-card:hover {
 #btn-logout:hover {
   background-color: rgb(200, 200, 200);
 }
+
+.btn {
+  margin-top: 0 !important;
+}
+
+.lista {
+  margin-top: 3rem;
+}
+
+.buscador {
+  width: 85%;
+}
