@@ -1,4 +1,4 @@
-const url = `https://japceibal.github.io/emercado-api/cats_products/101.json`;
+const url = PRODUCTS_URL + localStorage.getItem("catID") + EXT_TYPE;
 const lista = document.getElementById("lista");
 
 let productos = [];
