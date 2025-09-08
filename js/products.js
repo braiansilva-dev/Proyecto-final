@@ -101,9 +101,35 @@ function mostrarProductos(productosAMostrar) {
                 html: `
                     <div class="popup">
                         <div class="popup-contenido">
-                            <!-- Imagen y botón favorito -->
+                            <!-- Imagenes y botón favorito -->
                             <div class="popup-img">
-                                <img id="producto-imagen" src="${element.image}" alt="${element.name}" />
+
+                                <!-- Carrousel de imagenes -->
+                                <div id="carousel-${element.id}" class="carousel slide">
+                                    <div class="carousel-inner"> 
+                                        ${element.images?.map((img, i) => `
+                                            <div class="carousel-item ${i === 0 ? 'active' : ''}">
+                                                <img src="${img}" class="d-block w-100" alt="...">
+                                            </div>
+                                        `).join('') || `
+                                            <div class="carousel-item active">
+                                                <img src="${element.image}" class="d-block w-100" alt="...">
+                                            </div>
+                                        `}
+                                    </div>
+                                    
+                                    <!-- Botones del carrousel prev/next -->
+                                    <a class="carousel-control-prev" href="#carousel-${element.id}" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Anterior</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carousel-${element.id}" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Siguiente</span>
+                                    </a>
+                                </div>
+
+                                <!-- Botón favorito -->
                                 <input type="checkbox" style="display: none;" id="fav">
                                 <label for="fav" class="fav-btn">
                                     <i class="fa-solid fa-heart"></i>
