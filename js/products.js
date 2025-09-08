@@ -104,7 +104,7 @@ function mostrarProductos(productosAMostrar) {
                             <!-- Imagenes y botón favorito -->
                             <div class="popup-img">
 
-                                <!-- Carrousel de imagenes -->
+                                <!-- Carousel de imagenes -->
                                 <div id="carousel-${element.id}" class="carousel slide">
                                     <div class="carousel-inner"> 
                                         ${element.images?.map((img, i) => `
@@ -118,7 +118,7 @@ function mostrarProductos(productosAMostrar) {
                                         `}
                                     </div>
                                     
-                                    <!-- Botones del carrousel prev/next -->
+                                    <!-- Botones del carousel prev/next -->
                                     <a class="carousel-control-prev" href="#carousel-${element.id}" role="button" data-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                         <span class="sr-only">Anterior</span>
