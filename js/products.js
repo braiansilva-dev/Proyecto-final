@@ -96,7 +96,14 @@ function mostrarProductos(productosAMostrar) {
         
         // AGREGAR CLICK HANDLER PARA NAVEGACIÓN
         div.addEventListener("click", () => {
-            Swal.fire({
+          
+          const productoID = element.id;
+          const productoURL = PRODUCT_INFO_URL + productoID + EXT_TYPE;
+
+          fetch(productoURL)
+            .then(res => res.json())
+            .then(element => {
+Swal.fire({
                 title: "", // Lo dejamos vacío porque usaremos HTML personalizado
                 html: `
                     <div class="popup">
@@ -180,6 +187,8 @@ function mostrarProductos(productosAMostrar) {
                 background: "#fff", // Fondo blanco
                 
             });
+          });
+
         });
 
         // Imagen
