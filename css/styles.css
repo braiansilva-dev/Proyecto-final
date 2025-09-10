@@ -209,19 +209,26 @@ a.custom-card:hover {
 }
 
 .buscador {
-  width: 85%;
+  width: clamp(30%, 60vw, 80%);
+}
+
+.buscador .form-control {
+  font-size: clamp(0.75rem, 1vw, 1rem);
+  padding: clamp(0.4rem, 1vw, 0.6rem) clamp(0.6rem, 2vw, 1rem);
+}
+
+.btn-group .btn {
+  font-size: clamp(0.7rem, 1vw, 1rem);
+  padding: clamp(0.3rem, 0.8vw, 0.6rem) clamp(0.6rem, 1.5vw, 1rem);
+  border-radius: clamp(0.3rem, 1vw, 0.6rem);
+}
+
+.btn-group .btn {
+  min-width: clamp(2rem, 6vw, 3.5rem);
 }
 
 @media (max-width: 480px) {
-    .buscador {
-      width: 30% !important;
-    }
-    .form-control{
-      font-size: 12px !important;
-    }
-    .font-size {
-      font-size: 14px !important;
-    }
+    
     .flex {
       display: flex;
       flex-direction: column;
@@ -229,8 +236,16 @@ a.custom-card:hover {
     }
 }
 
-@media (max-width: 768px) {
-    .buscador {
-      width:60% !important;
-    }
+.font-size {
+  font-size: clamp(0.7rem, 1vw, 1rem); 
+  margin: 0; 
+}
+
+#filterMin,
+#filterMax {
+  font-size: clamp(0.7rem, 1vw, 1rem); 
+  padding: clamp(0.3rem, 0.8vw, 0.6rem) clamp(0.6rem, 1.5vw, 1rem);
+  border-radius: clamp(0.3rem, 1vw, 0.6rem);
+  min-width: clamp(2rem, 6vw, 3.5rem); 
+  text-align: center; 
 }
