@@ -1,0 +1,13 @@
+main {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center;     /* Centrar verticalmente */
+  min-height: 100vh;       /* Que ocupe toda la altura */    /* Opcional, para diferenciar fondo */
+}
+
+#elementos-product-info {
+  max-width: 800px;
+  width: 100%;
+  border-radius: 12px;
+  padding: 20px;
+}

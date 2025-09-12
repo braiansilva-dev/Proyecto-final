@@ -1,99 +1,85 @@
-/*
-// Función para obtener parámetros de la URL
-function obtenerParametroURL(nombre) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(nombre);
-}
+const producto = JSON.parse(localStorage.getItem("productoSeleccionado"));
+const detalle = document.getElementById("detalle");
+const category = producto?.category || "Categoría desconocida"; // si tenías category
 
-// Función para mostrar mensaje de error
-function mostrarError(mensaje) {
-    document.getElementById("producto-nombre").textContent = "Error";
-    document.getElementById("producto-descripcion").textContent = mensaje;
-    document.getElementById("producto-precio").textContent = "";
-    document.getElementById("producto-vendidos").textContent = "";
-    document.getElementById("producto-imagen").src = "";
-}
+    document.addEventListener("DOMContentLoaded", function(){
 
-// Función para cargar la información del producto
-function cargarProducto() {
-    const idProducto = obtenerParametroURL('id');
-    
-    // Si no hay ID en la URL, mostramos el primer producto por defecto
-    if (!idProducto) {
-        cargarProductoPorDefecto();
-        return;
-    }
-    
-    // Convertimos el ID a número
-    const numeroId = parseInt(idProducto);
-    
-    // Fetch
-    fetch("https://japceibal.github.io/emercado-api/cats_products/101.json")
-        .then(res => res.json())
-        .then(data => {
-            
-            const productos = data.products;
-            
-            // Buscamos el producto que coincida con el ID
-            const producto = productos.find(p => p.id === numeroId);
-            
-            if (producto) {
-                mostrarInformacionProducto(producto);
-            } else {
-                mostrarError(`No se encontró un producto con ID: ${numeroId}`);
-            }
-        })
-        .catch(err => {
-            console.error("Error al cargar productos:", err);
-            mostrarError("Error al cargar la información del producto");
+    if (producto) {
+        detalle.innerHTML = ` 
+            <!-- Imagenes y botón favorito -->
+            <div id="elementos-product-info">
+                <div class="popup-img">
+
+               <!-- Carousel de imagenes -->
+                  <div id="carousel-${producto.id}" class="carousel slide">
+                    <div class="carousel-inner"> 
+                      ${producto.images?.map((img, i) => `
+                        <div class="carousel-item ${i === 0 ? 'active' : ''}">
+                          <img src="${img}" class="d-block w-100" alt="...">
+                        </div>
+                      `).join('') || `
+                        <div class="carousel-item active">
+                          <img src="${producto.image}" class="d-block w-100" alt="...">
+                        </div>
+                      `}
+                    </div>
+                    
+                    <!-- Botones del carousel prev/next -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${producto.id}" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel-${producto.id}" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                    </button>
+
+
+                  <!-- Botón favorito -->
+                  <input type="checkbox" style="display: none;" id="fav">
+                  <label for="fav" class="fav-btn">
+                    <i class="fa-solid fa-heart"></i>
+                  </label>
+                </div>
+
+                <!-- Info del producto -->
+                <div class="popup-info">
+                  <h2 id="producto-nombre">${producto.name}</h2>
+                  <span id="producto-tag" class="tag">${category}</span>
+                  <p id="producto-precio" class="price">${producto.currency} ${producto.cost}</p>
+                  <p id="producto-vendidos" class="sold">${producto.soldCount || 0} vendidos</p>
+
+                  <!-- Selectores (opciones) -->
+                  <div class="options">
+                    <label>
+                      Modelo
+                      <select>
+                        <option>Standard</option>
+                        ${producto.relatedProducts?.map(prod => `<option>${prod.name}</option>`).join('') || ''}
+                      </select>
+                    </label>
+                    <label>
+                      Color
+                      <select>
+                        <option>Negro</option>
+                        <option>Blanco</option>
+                      </select>
+                    </label>
+                  </div>
+
+                  <!-- Botón de compra -->
+                  <button class="buy-btn">Comprar</button>
+
+                  <!-- Descripción (acordeón) -->
+                  <details>
+                    <summary>Descripción</summary>
+                    <p id="producto-descripcion">${producto.description || "No hay descripción disponible."}</p>
+                  </details>
+                </div>
+            </div>
+          `;
+        } else {
+          detalle.innerHTML = `<p>No se encontró el producto.</p>`;
+        }
+
         });
-}
-
-// Función para mostrar la información del producto en la página
-function mostrarInformacionProducto(producto) {
-    document.getElementById("producto-imagen").src = producto.image;
-    document.getElementById("producto-nombre").textContent = producto.name;
-    document.getElementById("producto-precio").textContent = `${producto.currency} ${producto.cost}`;
-    document.getElementById("producto-vendidos").textContent = `${producto.soldCount} vendidos`;
-    document.getElementById("producto-descripcion").textContent = producto.description;
-    
-    // Agregamos el tag si existe
-    const tagElement = document.getElementById("producto-tag");
-    if (tagElement) {
-        tagElement.textContent = producto.category || "Auto";
-    }
-}
-
-// Función para cargar producto por defecto (el primero de la lista)
-function cargarProductoPorDefecto() {
-    fetch("https://japceibal.github.io/emercado-api/cats_products/101.json")
-        .then(res => res.json())
-        .then(data => {
-            
-            const productos = data.products;
-            const producto = productos[0]; // primer producto por defecto
-            mostrarInformacionProducto(producto);
-        })
-        .catch(err => {
-            console.error("Error al cargar productos:", err);
-            mostrarError("Error al cargar la información del producto");
-        });
-}
-
-// Cuando la página se carga, ejecutamos la función
-document.addEventListener('DOMContentLoaded', cargarProducto);
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Cargar producto
-    cargarProducto();
-    
-    // Event listener para el botón volver
-    const btnVolver = document.getElementById("btn-volver");
-    if (btnVolver) {
-        btnVolver.addEventListener("click", function() {
-            window.location.href = "products.html";
-        });
-    }
-});
-
-*/

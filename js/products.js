@@ -103,7 +103,7 @@ function mostrarProductos(productosAMostrar) {
           fetch(productoURL)
             .then(res => res.json())
             .then(element => {
-Swal.fire({
+          Swal.fire({
                 title: "", // Lo dejamos vacío porque usaremos HTML personalizado
                 html: `
                     <div class="popup">
@@ -176,6 +176,7 @@ Swal.fire({
                                     <summary>Descripción</summary>
                                     <p id="producto-descripcion">${element.description || "No hay descripción disponible."}</p>
                                 </details>
+                                <a href="#" id="vermas">ver mas</a>
                             </div>
                         </div>
                     </div>
@@ -185,6 +186,19 @@ Swal.fire({
                 width: "auto", // Ancho automático
                 padding: "1rem", // Padding personalizado
                 background: "#fff", // Fondo blanco
+                //Evento de abrir el ver mas 
+                didOpen: () => {
+                    const ver = document.getElementById('vermas');
+                    ver.addEventListener("click", (e) => {
+                        e.preventDefault();
+
+                        // Guardamos el producto en localStorage
+                        localStorage.setItem("productoSeleccionado", JSON.stringify(element));
+
+                        // Redirigimos a la página de detalle
+                        window.location.href = "product-info.html";
+                    });
+                }
                 
             });
           });
