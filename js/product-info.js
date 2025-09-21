@@ -1,8 +1,11 @@
 const producto = JSON.parse(localStorage.getItem("productoSeleccionado"));
 const detalle = document.getElementById("detalle");
-const category = producto?.category || "Categoría desconocida"; // si tenías category
+const category = producto?.category || "Categoría desconocida";
 
-    document.addEventListener("DOMContentLoaded", function(){
+// Obtener la lista de productos desde localStorage (guardada por products.js)
+const productos = JSON.parse(localStorage.getItem("productos")) || [];
+
+document.addEventListener("DOMContentLoaded", function(){
 
     if (producto) {
         detalle.innerHTML = ` 
@@ -75,9 +78,60 @@ const category = producto?.category || "Categoría desconocida"; // si tenías c
                     <summary>Descripción</summary>
                     <p id="producto-descripcion">${producto.description || "No hay descripción disponible."}</p>
                   </details>
+
+                  <!-- Sección de productos relacionados -->
+                  <div id="productos-relacionados" class="productos-rel">
+                    <h3>Productos relacionados</h3>
+                    <div class="productos-rel-container">
+                      ${
+                        // Buscar el producto completo por id
+                        producto.relatedProducts?.map(prod => {
+                          const prodCompleto = productos.find(p => p.id === prod.id);
+                          if (prodCompleto) {
+                            return `
+                              <div class="producto-relacionado" 
+                                data-producto-id='${prodCompleto.id}'>
+                                <img class="img-producto" src="${prodCompleto.image}" alt="${prodCompleto.name}">
+                                <p style="margin:10px 0 0 0;">${prodCompleto.name}</p>
+                              </div>
+                            `;
+                          } else {
+                            // Si no se encuentra el producto completo, mostrar el básico
+                            return `
+                              <div class="producto-relacionado" 
+                                data-producto-id='${prod.id}'>
+                                <img src="${prod.image}" alt="${prod.name}" style="width:150px; height:auto; object-fit:cover;">
+                                <p style="margin:10px 0 0 0;">${prod.name}</p>
+                              </div>
+                            `;
+                          }
+                        }).join('') || '<p>No hay productos relacionados.</p>'
+                      }
+                    </div>
+                  </div>
                 </div>
             </div>
           `;
+
+          // Evento para productos relacionados
+          document.querySelectorAll('.producto-relacionado').forEach(el => {
+            el.addEventListener('click', function() {
+              const prodId = parseInt(this.getAttribute('data-producto-id'));
+              // Hacer fetch para traer el producto completo por su id
+              const PRODUCT_INFO_URL = "https://japceibal.github.io/emercado-api/products/"; 
+              const EXT_TYPE = ".json";
+              fetch(PRODUCT_INFO_URL + prodId + EXT_TYPE)
+                .then(res => res.json())
+                .then(productoCompleto => {
+                  localStorage.setItem("productoSeleccionado", JSON.stringify(productoCompleto));
+                  location.reload();
+                })
+                .catch(() => {
+                  alert("No se pudo cargar el producto.");
+                });
+            });
+          });
+
         } else {
           detalle.innerHTML = `<p>No se encontró el producto.</p>`;
         }
