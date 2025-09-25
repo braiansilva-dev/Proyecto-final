@@ -55,7 +55,37 @@
     </nav>
     <main>
       <!--Dentro del div va todo-->
-      <div id="detalle"></div>
+      <div id="detalle">
+
+        <div id="calificaciones" class="container border rounded p-3 bg-light mt-5 mb-5">
+          <form id="form-calificaciones">
+          
+            <!-- Comentario -->
+            <label for="comentario" class="form-label">Comentario</label>
+            <textarea class="text-dark p-2 form-control" id="comentario" placeholder="Escribe tu opinión aquí..."></textarea>
+            
+            <div class="d-flex justify-content-between align-items-center mt-2">
+              <!-- Calificación -->
+              <div class="stars text-secondary text-nowrap">
+                <input type="radio" name="star" id="star-1" class="d-none"/>
+                <label for="star-1"><i class="fa fa-star" style="cursor: pointer;"></i></label>
+                <input type="radio" name="star" id="star-2" class="d-none"/>
+                <label for="star-2"><i class="fa fa-star" style="cursor: pointer;"></i></label>
+                <input type="radio" name="star" id="star-3" class="d-none"/>
+                <label for="star-3"><i class="fa fa-star" style="cursor: pointer;"></i></label>
+                <input type="radio" name="star" id="star-4" class="d-none"/>
+                <label for="star-4"><i class="fa fa-star" style="cursor: pointer;"></i></label>
+                <input type="radio" name="star" id="star-5" class="d-none"/>
+                <label for="star-5"><i class="fa fa-star" style="cursor: pointer;"></i></label>
+              </div>
+              
+              <!-- Botón -->
+              <button class="btn btn-primary">Enviar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
     </main>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>

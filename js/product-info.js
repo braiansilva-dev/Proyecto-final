@@ -1,11 +1,12 @@
 const producto = JSON.parse(localStorage.getItem("productoSeleccionado"));
 const detalle = document.getElementById("detalle");
 const category = producto?.category || "Categoría desconocida"; // si tenías category
+const starInputs = document.querySelectorAll("input[name='star']");
 
     document.addEventListener("DOMContentLoaded", function(){
 
     if (producto) {
-        detalle.innerHTML = ` 
+        detalle.insertAdjacentHTML("afterbegin",` 
             <!-- Imagenes y botón favorito -->
             <div id="elementos-product-info">
                 <div class="popup-img">
@@ -77,9 +78,39 @@ const category = producto?.category || "Categoría desconocida"; // si tenías c
                   </details>
                 </div>
             </div>
-          `;
+          `)
         } else {
           detalle.innerHTML = `<p>No se encontró el producto.</p>`;
         }
+    
+    function paintStars(value) {
+      starInputs.forEach((star) => {
+        const starValue = parseInt(star.id.split("-")[1], 10);
+        const icon = document.querySelector(`label[for='${star.id}'] i`);
+        if (icon) {
+          if (starValue <= value) icon.classList.add("text-warning");
+          else icon.classList.remove("text-warning");
+        }
+      });
+    }
 
-        });
+    function getSelectedValue() {
+      const selected = document.querySelector("input[name='star']:checked");
+      return selected ? parseInt(selected.id.split("-")[1], 10) : 0;
+    }  
+
+    starInputs.forEach((input) => {
+      const value = parseInt(input.id.split("-")[1], 10);
+      const label = document.querySelector(`label[for='${input.id}']`);
+
+      if (label) {
+        // Hover: pintar hasta esa estrella
+        label.addEventListener("mouseover", () => paintStars(value));
+        // Al salir con el mouse: volver al valor seleccionado
+        label.addEventListener("mouseout", () => paintStars(getSelectedValue()));
+      }
+
+      // Click: seleccionar y pintar hasta esa estrella
+      input.addEventListener("change", () => paintStars(value));
+    });
+  });
