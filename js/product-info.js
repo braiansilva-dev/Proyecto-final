@@ -1,12 +1,13 @@
 const producto = JSON.parse(localStorage.getItem("productoSeleccionado"));
 const detalle = document.getElementById("detalle");
 const category = producto?.category || "Categoría desconocida";
+const Comentarios = `${PRODUCT_INFO_COMMENTS_URL}${producto.id}.json`;
 
 // Obtener la lista de productos desde localStorage (guardada por products.js)
 const productos = JSON.parse(localStorage.getItem("productos")) || [];
 
 document.addEventListener("DOMContentLoaded", function(){
-
+    let commentsSection; // lo declaramos acá
     if (producto) {
         detalle.innerHTML = ` 
             <!-- Imagenes y botón favorito -->
@@ -109,6 +110,12 @@ document.addEventListener("DOMContentLoaded", function(){
                       }
                     </div>
                   </div>
+
+                  <!-- Comentarios -->
+                  <div>
+                    <h3 class="mt-4">Comentarios</h3>
+                    <ul class="list-group d-flex flex-column gap-2" id="commentsSection"></ul>
+                  </div>
                 </div>
             </div>
           `;
@@ -131,6 +138,55 @@ document.addEventListener("DOMContentLoaded", function(){
                 });
             });
           });
+
+
+          // 🔹 Ahora sí capturamos el nuevo <ul>
+          commentsSection = document.getElementById("commentsSection");
+          function renderComment(comment) {
+          const li = document.createElement("li");
+          li.className = "list-group-item";
+
+          const top = document.createElement("div");
+          top.className = "d-flex justify-content-between border-bottom pb-2";
+
+          const left = document.createElement("div");
+
+          const userSpan = document.createElement("span");
+          userSpan.className = "user-name me-2 fw-semibold";
+          userSpan.textContent = comment.user;
+
+          const starsSpan = document.createElement("span");
+          starsSpan.className = "stars text-nowrap";
+          starsSpan.innerHTML =
+            `<i class="fa fa-star text-warning"></i> `.repeat(comment.score) +
+            `<i class="fa fa-star text-secondary"></i> `.repeat(5 - comment.score);
+
+          left.appendChild(userSpan);
+          left.appendChild(starsSpan);
+
+          const dateDiv = document.createElement("div");
+          dateDiv.className = "date";
+          dateDiv.textContent = new Date(comment.dateTime).toLocaleDateString();
+
+          top.appendChild(left);
+          top.appendChild(dateDiv);
+
+          const commentDiv = document.createElement("div");
+          commentDiv.className = "comment pt-2";
+          commentDiv.textContent = comment.description;
+
+          li.appendChild(top);
+          li.appendChild(commentDiv);
+
+          commentsSection.appendChild(li);
+          }
+          fetch(Comentarios)
+            .then((response) => {
+              if (!response.ok) throw new Error("Network response was not ok");
+              return response.json();
+            })
+            .then((data) => data.forEach(renderComment))
+            .catch((error) => console.error("Error fetching comments:", error));
 
         } else {
           detalle.innerHTML = `<p>No se encontró el producto.</p>`;
