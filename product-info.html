@@ -15,9 +15,10 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/style-popup.css" rel="stylesheet" />
+    <link href="css/toast.css" rel="stylesheet">
     <!--link css de estilos para product info-->
     <link rel="stylesheet" href="css/style-Product-info.css">
-
+    <script src="https://kit.fontawesome.com/96f866440f.js" crossorigin="anonymous"></script>
     <script src="js/auth.js"></script>
   </head>
 
@@ -53,7 +54,7 @@
         </div>
       </div>
     </nav>
-    <main>
+    <main class="p-5">
       <!--Dentro del div va todo-->
       <div id="detalle">
 
@@ -80,15 +81,20 @@
               </div>
               
               <!-- Botón -->
-              <button class="btn btn-primary">Enviar</button>
+              <button class="btn btn-primary" id="submitButton">Enviar</button>
             </div>
           </form>
         </div>
       </div>
       
     </main>
+
+    <div id="toast">
+      <p></p>
+    </div>
+
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
-    <script src="js/product-info.js"></script>
+    <script src="js/product-info.js" type="module"></script>
   </body>
 </html>
