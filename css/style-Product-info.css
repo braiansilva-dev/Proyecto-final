@@ -5,7 +5,7 @@ main {
   min-height: 100vh;       /* Que ocupe toda la altura */    /* Opcional, para diferenciar fondo */
 }
 
-#elementos-product-info {
+#elementos-product-info{
   max-width: 800px;
   width: 100%;
   border-radius: 12px;
@@ -34,4 +34,8 @@ main {
   width:100px; 
   height:100px; 
   object-fit:cover;
+}
+
+.comment {
+  word-break: break-all;
 }
