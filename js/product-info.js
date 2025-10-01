@@ -272,7 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!commentText || !score) {
       showToast(
-        "Por favor escribe un comentario y elege una puntuación.",
+        "Por favor escribe un comentario y elige una puntuación.",
         "error"
       );
       return;
