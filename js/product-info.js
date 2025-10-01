@@ -258,46 +258,6 @@ document.addEventListener("DOMContentLoaded", function () {
     input.addEventListener("change", () => paintStars(value));
   });
 
-  function renderComment(comment) {
-    const li = document.createElement("li");
-    li.className = "list-group-item";
-
-    const top = document.createElement("div");
-    top.className = "d-flex justify-content-between border-bottom pb-2";
-
-    const left = document.createElement("div");
-
-    const userSpan = document.createElement("span");
-    userSpan.className = "user-name me-2 fw-semibold";
-    userSpan.textContent = comment.user;
-
-    const starsSpan = document.createElement("span");
-    starsSpan.className = "stars text-nowrap";
-    // siempre estrellas con text-warning en las activas
-    starsSpan.innerHTML =
-      `<i class="fa fa-star text-warning"></i> `.repeat(comment.score) +
-      `<i class="fa fa-star text-secondary"></i> `.repeat(5 - comment.score);
-
-    left.appendChild(userSpan);
-    left.appendChild(starsSpan);
-
-    const dateDiv = document.createElement("div");
-    dateDiv.className = "date";
-    dateDiv.textContent = new Date(comment.dateTime).toLocaleDateString();
-
-    top.appendChild(left);
-    top.appendChild(dateDiv);
-
-    const commentDiv = document.createElement("div");
-    commentDiv.className = "comment pt-2";
-    commentDiv.textContent = comment.description;
-
-    li.appendChild(top);
-    li.appendChild(commentDiv);
-
-    commentsSection.appendChild(li);
-  }
-
   // === Botón de enviar comentario ===
   const submitButton = document.getElementById("submitButton");
   const commentInput = document.getElementById("comentario");

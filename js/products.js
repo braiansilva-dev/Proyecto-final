@@ -172,11 +172,11 @@ function mostrarProductos(productosAMostrar) {
                                 <button class="buy-btn">Comprar</button>
 
                                 <!-- Descripción (acordeón) -->
-                                <details>
+                                <details open>
                                     <summary>Descripción</summary>
                                     <p id="producto-descripcion">${element.description || "No hay descripción disponible."}</p>
                                 </details>
-                                <a href="#" id="vermas">ver mas</a>
+                                <a href="#" id="vermas" class="fw-bold">Ver más</a>
                             </div>
                         </div>
                     </div>
