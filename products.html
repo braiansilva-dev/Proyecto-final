@@ -165,10 +165,20 @@
     <script src="js/init.js"></script>
     <script src="js/products.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const username = localStorage.getItem("username");
-        if (username) {
-          document.getElementById("nombreUsuario").innerText = username;
+     document.addEventListener("DOMContentLoaded", () => {
+        
+        const usersData = JSON.parse(localStorage.getItem("usersData")) || {};
+        const currentUser = localStorage.getItem("currentUser");
+
+        if (currentUser && usersData[currentUser]) {
+          const userData = usersData[currentUser];
+
+          
+          if (userData.user) {
+            document.getElementById("nombreUsuario").innerText = userData.user;
+          } else {
+            document.getElementById("nombreUsuario").innerText = userData.email;
+          }
         }
       });
 
