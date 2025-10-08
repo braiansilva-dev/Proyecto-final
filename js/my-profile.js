@@ -29,7 +29,7 @@ imageInput.addEventListener("change", function () {
   // validación tamaño máximo en MB
   const maxSizeMB = 2;
   if (file.size / 1024 / 1024 > maxSizeMB) {
-    alert(`La imagen es demasiado grande. Máximo permitido: ${maxSizeMB} MB`);
+    showToast(`La imagen es demasiado grande. Máximo permitido: ${maxSizeMB} MB`, "error");
     this.value = "";
     return;
   }
