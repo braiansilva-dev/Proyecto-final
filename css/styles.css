@@ -249,3 +249,27 @@ a.custom-card:hover {
   min-width: clamp(2rem, 6vw, 3.5rem); 
   text-align: center; 
 }
+
+
+/* MODO OSCURO, CAMBIO DE CLASE ANANANANANANAA */
+body.modo-oscuro main {
+  background-color: #1f1f1f !important;
+  color: #e0e0e0 !important;
+}
+
+body.modo-oscuro .card,
+body.modo-oscuro .album,
+body.modo-oscuro .container {
+  background-color: #111112 !important;
+  color: #e0e0e0 !important;
+}
+
+body.modo-oscuro .btn-light {
+  background-color: #333 !important;
+  color: #fff !important;
+}
+
+body.modo-oscuro footer {
+  background-color: #111112 !important;
+  color: #ccc !important;
+}

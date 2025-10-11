@@ -14,6 +14,8 @@
     />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
+    <!--swich-->
+    <link rel="stylesheet" href="css/style-switch.css">
 
     <script src="js/auth.js"></script>
 
@@ -65,9 +67,17 @@
               </div>
 
             </li>
+            <li>
+              <!--switch -->
+              <label class="switch">
+                <input type="checkbox" id="miCheckboxId">
+                <span class="slider round"></span>
+              </label>
+            </li>
           </ul>
         </div>
       </div>
+</label>
     </nav>
     <main>
       <div class="jumbotron text-center"></div>
@@ -163,7 +173,30 @@
           document.getElementById("nombreUsuario").innerText = username;
         }
       });
+    </script>
+    <!--Checkbox code-->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const miCheckbox = document.getElementById("miCheckboxId");
+        const body = document.body;
 
+        // Aplica el modo oscuro si está guardado en localStorage
+        if (localStorage.getItem("fondo") === "1") {
+          body.classList.add("modo-oscuro");
+          miCheckbox.checked = true;
+        }
+
+        // Cuando se cambia el switch
+        miCheckbox.addEventListener("change", () => {
+          if (miCheckbox.checked) {
+            body.classList.add("modo-oscuro");
+            localStorage.setItem("fondo", "1");
+          } else {
+            body.classList.remove("modo-oscuro");
+            localStorage.setItem("fondo", "0");
+          }
+        });
+      });
     </script>
   </body>
 </html>
