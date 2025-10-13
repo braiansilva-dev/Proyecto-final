@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     logoutBtn.addEventListener("click", () => {
       localStorage.removeItem("loggedIn");
       localStorage.setItem("logoutMessage", "true");
+      localStorage.removeItem("currentUser");
       window.location.href = "login.html";
     });
   }
