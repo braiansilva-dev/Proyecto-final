@@ -16,6 +16,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/toast.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style-switch.css">
 
     <!-- Bootstrap 4 y dependencias -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -74,6 +75,13 @@
                   Cerrar sesión
                 </button>
               </div>
+            </li>
+            <li>
+              <!--switch --> 
+              <label class="switch"> 
+                <input type="checkbox" id="miCheckboxId"> 
+                <span class="slider round"></span>
+              </label>
             </li>
           </ul>
         </div>
@@ -194,6 +202,30 @@
             document.getElementById("nombreUsuario").innerText = userData.email;
           }
         }
+      });
+    </script>
+    <!--script para switch-->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const miCheckbox = document.getElementById("miCheckboxId");
+        const body = document.body;
+
+        // Aplica el modo oscuro si está guardado en localStorage
+        if (localStorage.getItem("fondo") === "1") {
+          body.classList.add("modo-oscuro");
+          miCheckbox.checked = true;
+        }
+
+        // Cuando se cambia el switch
+        miCheckbox.addEventListener("change", () => {
+          if (miCheckbox.checked) {
+            body.classList.add("modo-oscuro");
+            localStorage.setItem("fondo", "1");
+          } else {
+            body.classList.remove("modo-oscuro");
+            localStorage.setItem("fondo", "0");
+          }
+        });
       });
     </script>
   </body>
