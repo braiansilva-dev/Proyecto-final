@@ -16,6 +16,7 @@
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/style-popup.css" rel="stylesheet" />
     <link href="css/toast.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style-switch.css">
     <!--link css de estilos para product info-->
     <link rel="stylesheet" href="css/style-Product-info.css">
     <script src="https://kit.fontawesome.com/96f866440f.js" crossorigin="anonymous"></script>
@@ -63,6 +64,13 @@
             <div class="dropdown-divider"></div>
             <button id="btn-logout" class="dropdown-item text-danger">Cerrar sesión</button>
           </div>
+        </li>
+        <li>
+          <!--switch --> 
+          <label class="switch"> 
+            <input type="checkbox" id="miCheckboxId"> 
+            <span class="slider round"></span>
+          </label>
         </li>
       </ul>
     </div>
@@ -127,6 +135,30 @@
             document.getElementById("nombreUsuario").innerText = userData.email;
           }
         }
+      });
+    </script>
+    <!--script para switch-->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const miCheckbox = document.getElementById("miCheckboxId");
+        const body = document.body;
+
+        // Aplica el modo oscuro si está guardado en localStorage
+        if (localStorage.getItem("fondo") === "1") {
+          body.classList.add("modo-oscuro");
+          miCheckbox.checked = true;
+        }
+
+        // Cuando se cambia el switch
+        miCheckbox.addEventListener("change", () => {
+          if (miCheckbox.checked) {
+            body.classList.add("modo-oscuro");
+            localStorage.setItem("fondo", "1");
+          } else {
+            body.classList.remove("modo-oscuro");
+            localStorage.setItem("fondo", "0");
+          }
+        });
       });
     </script>
   </body>
