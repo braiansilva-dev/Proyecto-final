@@ -169,7 +169,7 @@ function mostrarProductos(productosAMostrar) {
                                 </div>
 
                                 <!-- Botón de compra -->
-                                <button class="buy-btn">Comprar</button>
+                                <button class="buy-btn" onclick="window.location.href='cart.html'">Comprar</button>
 
                                 <!-- Descripción (acordeón) -->
                                 <details open>

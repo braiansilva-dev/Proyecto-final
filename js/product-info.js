@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   </div>
 
                   <!-- Botón de compra -->
-                  <button class="buy-btn">Comprar</button>
+                  <button class="buy-btn" onclick="window.location.href='cart.html'">Comprar</button>
 
                   <!-- Descripción (acordeón) -->
                   <details open>
@@ -266,7 +266,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const commentInput = document.getElementById("comentario");
   submitButton.addEventListener("click", (e) => {
     e.preventDefault();
-    const user = localStorage.getItem("username") || "Usuario";
+    const userData = JSON.parse(localStorage.getItem("usersData")) || {};
+    const currentUser = localStorage.getItem("currentUser");
+    const user = userData[currentUser].user || userData[currentUser].email || "Usuario";
+
     const commentText = commentInput.value.trim();
     const score = getSelectedValue();
 
