@@ -95,8 +95,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     </label>
                   </div>
 
-                  <!-- Botón de compra -->
-                  <button class="buy-btn" onclick="window.location.href='cart.html'">Comprar</button>
+                  <!-- Botón de compra -->   <!--Acá redirige al carrito-->
+                  <button id= "btncompara" class="buy-btn" onclick="window.location.href='cart.html'">Comprar</button>
 
                   <!-- Descripción (acordeón) -->
                   <details open>
@@ -295,4 +295,22 @@ document.addEventListener("DOMContentLoaded", function () {
     starInputs.forEach((star) => (star.checked = false));
     paintStars(0); // apaga todas las estrellas
   });
+
+  //FUNCION PARA QUE AL APRETAR BOTON: COMPRAR SE GUARDE EN EL LOCALSTORAGE
+
+  const btnN = document.getElementById("btncompara");
+
+  btnN.addEventListener("click", function () {
+    let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+    const existe = cartItems.some(item => item.id === producto.id);
+    if (!existe) {
+      cartItems.push(producto);
+    }
+
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+    window.location.href = "cart.html";
+  });
+
 });
