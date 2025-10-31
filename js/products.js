@@ -168,9 +168,6 @@ function mostrarProductos(productosAMostrar) {
                                     </label>
                                 </div>
 
-                                <!-- Botón de compra -->
-                                <button class="buy-btn">Comprar</button>
-
                                 <!-- Descripción (acordeón) -->
                                 <details open>
                                     <summary>Descripción</summary>
@@ -265,3 +262,4 @@ buscadorInput.addEventListener('input', buscarProductos);
 
 // Llamada a la función
 datos(url);
+

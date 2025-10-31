@@ -297,3 +297,8 @@ body.modo-oscuro #vermas:hover {
 .popup, .swal2-popup {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+
+body.modo-oscuro .alert.alert-info {
+  color: black !important;
+}
