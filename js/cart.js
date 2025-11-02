@@ -75,6 +75,12 @@ document.addEventListener("DOMContentLoaded", () => {
                   </div>
                 </div>
               </div>
+              <div class="text-end mt-2">
+                <small>Subtotal:</small>
+                <span class="fw-bold subtotal" id="subtotal-${index}">
+                  ${item.currency === "USD" ? "$" : item.currency} ${item.cost}
+                </span>
+              </div>
             </div>
           </div>
         </div>`;
@@ -101,6 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     `;
     addListeners();
+    updateTotal();
   }
 
   // Eliminar producto
@@ -115,7 +122,38 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     });
+
+    // Actualizar total
+    document.querySelectorAll(".cantidad-select").forEach((select) => {
+      select.addEventListener("change", (e) => {
+        const index = parseInt(e.target.dataset.index, 10);
+        const cantidad = parseInt(e.target.value, 10);
+        const item = cartItems[index];
+
+        const subtotal = item.cost * cantidad;
+        const subtotalElement = document.getElementById(`subtotal-${index}`);
+        subtotalElement.textContent = `${item.currency === "USD" ? "$" : item.currency} ${subtotal}`;
+
+        updateTotal(); // actualizar total general
+      });
+    });
   }
+
+  // función para actualizar el total general
+  function updateTotal() {
+    let total = 0;
+    document.querySelectorAll(".cantidad-select").forEach((select, index) => {
+      const cantidad = parseInt(select.value, 10);
+      const item = cartItems[index];
+      total += item.cost * cantidad;
+    });
+
+    const totalElement = document.getElementById("cart-total");
+    if (totalElement) {
+      totalElement.textContent = `$${total} USD`;
+    }
+  }
+
 
   // Render inicial
   renderCart();
