@@ -71,10 +71,13 @@ body.modo-oscuro .list-group-item {
 body.modo-oscuro h1,
 body.modo-oscuro h2,
 body.modo-oscuro h3,
-body.modo-oscuro h4,
-body.modo-oscuro p,
 body.modo-oscuro label {
   color: #f0f0f0 !important;
+}
+
+body.modo-oscuro h4,
+body.modo-oscuro p {
+  color: #000000 !important;
 }
 
 /* --- Inputs y formularios --- */
@@ -155,10 +158,6 @@ body.modo-oscuro .text-muted {
 body.modo-oscuro .text-end,
 body.modo-oscuro .text-center {
   color: #e0e0e0 !important;
-}
-
-body.modo-oscuro a {
-  color: #66b2ff !important;
 }
 
 body.modo-oscuro a:hover {

@@ -15,33 +15,7 @@
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/style-switch.css" />
-
-    <style>
-      #cart-summary {
-        position: sticky;
-        bottom: 0;
-        background-color: white;
-        z-index: 10;
-        border-radius: 0.5rem;
-      }
-
-      /* Centrado en pantallas pequeñas */
-      @media (max-width: 991px) {
-        #cart-summary {
-          margin: 1rem auto;
-          text-align: center;
-        }
-      }
-
-      /* A la derecha en pantallas grandes */
-      @media (min-width: 992px) {
-        #cart-summary {
-          margin-left: auto;
-          margin-right: 0;
-          width: 320px;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="css/cart.css" />
 
     <!-- Bootstrap Icons -->
     <link
@@ -133,7 +107,102 @@
         <h1><i class="fa fa-shopping-cart"></i> Carrito</h1>
       </div>
 
-      <div class="container" id="cartContainer"></div>
+      <div class="container">
+        <div class="row">
+          <!-- Columna del carrito -->
+          <div class="col-lg-6 mb-4" id="cartColumn">
+            <div id="cartContainer"></div>
+          </div>
+          
+          <!-- Columna del checkout -->
+          <div class="col-lg-6 mb-4" id="checkoutColumn">
+            <div class="checkout-section">
+              <h5><i class="bi bi-truck"></i> Tipo de envío</h5>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipoEnvio" id="premium" value="0.15" checked>
+                <label class="form-check-label" for="premium">
+                  Premium 2 a 5 días (15%)
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipoEnvio" id="express" value="0.07">
+                <label class="form-check-label" for="express">
+                  Express 5 a 8 días (7%)
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipoEnvio" id="standard" value="0.05">
+                <label class="form-check-label" for="standard">
+                  Standard 12 a 15 días (5%)
+                </label>
+              </div>
+            </div>
+            
+            <div class="checkout-section">
+              <h5><i class="bi bi-geo-alt"></i> Dirección de envío</h5>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="departamento" class="form-label">Departamento</label>
+                  <input type="text" class="form-control" id="departamento" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="localidad" class="form-label">Localidad</label>
+                  <input type="text" class="form-control" id="localidad" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-8 mb-3">
+                  <label for="calle" class="form-label">Calle</label>
+                  <input type="text" class="form-control" id="calle" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label for="numero" class="form-label">Número</label>
+                  <input type="text" class="form-control" id="numero" required>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="esquina" class="form-label">Esquina</label>
+                <input type="text" class="form-control" id="esquina">
+              </div>
+            </div>
+            
+            <div class="checkout-section">
+              <h5><i class="bi bi-credit-card"></i> Forma de pago</h5>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="formaPago" id="tarjeta" checked>
+                <label class="form-check-label" for="tarjeta">
+                  Tarjeta de crédito
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="formaPago" id="transferencia">
+                <label class="form-check-label" for="transferencia">
+                  Transferencia bancaria
+                </label>
+              </div>
+            </div>
+            
+            <div class="costos-section">
+              <h5><i class="bi bi-calculator"></i> Costos</h5>
+              <div class="costo-item">
+                <span>Subtotal:</span>
+                <span id="subtotal-costo">$0 USD</span>
+              </div>
+              <div class="costo-item">
+                <span>Costo de envío:</span>
+                <span id="costo-envio">$0 USD</span>
+              </div>
+              <div class="costo-item costo-total">
+                <span>Total:</span>
+                <span id="total-costo">$0 USD</span>
+              </div>
+              <button id="btn-finalizar" class="btn btn-primary btn-finalizar mt-3">
+                Finalizar compra
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
 
     <footer class="text-muted mt-5">
@@ -160,36 +229,5 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/cart.js"></script>
-
-    <!-- Switch y usuario -->
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const miCheckbox = document.getElementById("miCheckboxId");
-        const body = document.body;
-
-        if (localStorage.getItem("fondo") === "1") {
-          body.classList.add("modo-oscuro");
-          miCheckbox.checked = true;
-        }
-
-        miCheckbox.addEventListener("change", () => {
-          if (miCheckbox.checked) {
-            body.classList.add("modo-oscuro");
-            localStorage.setItem("fondo", "1");
-          } else {
-            body.classList.remove("modo-oscuro");
-            localStorage.setItem("fondo", "0");
-          }
-        });
-
-        const usersData = JSON.parse(localStorage.getItem("usersData")) || {};
-        const currentUser = localStorage.getItem("currentUser");
-        if (currentUser && usersData[currentUser]) {
-          const userData = usersData[currentUser];
-          document.getElementById("nombreUsuario").innerText =
-            userData.user || userData.email;
-        }
-      });
-    </script>
   </body>
 </html>
