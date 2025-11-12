@@ -435,6 +435,7 @@ a.custom-card:hover {
   }
 }
 
+
 /* Estilos para el modo oscuro */
 .modo-oscuro .checkout-section,
 .modo-oscuro .costos-section {
@@ -468,28 +469,31 @@ a.custom-card:hover {
   color: #e2e8f0;
 }
 
+.modo-oscuro main .alert-info {
+  color: #000000 !important;
+}
+.modo-oscuro main .alert-info i {
+  color: #000000 !important;
+}
+
 /* Modo oscuro para el mensaje de compra exitosa */
-.modo-oscuro #cartContainer .alert-success {
+.modo-oscuro main .alert-success {
     color: #000000 !important;
     background-color: #d4edda;
     border-color: #c3e6cb;
 }
 
-.modo-oscuro #cartContainer .alert-success h4,
-.modo-oscuro #cartContainer .alert-success p,
-.modo-oscuro #cartContainer .alert-success strong {
+.modo-oscuro main .alert-success p,
+.modo-oscuro main .alert-success strong {
     color: #000000 !important;
 }
 
-.modo-oscuro #cartContainer .alert-success .text-success {
-    color: #000000 !important;
+.modo-oscuro main h4.text-success,
+.modo-oscuro main .alert-success .text-success {
+    color: #1b8a11 !important;
 }
 
 /* Botón con letras negras pero manteniendo el azul de fondo */
-.modo-oscuro #cartContainer .alert-success .btn-primary {
+.modo-oscuro main .alert-success .btn-primary {
     color: #000000 !important;
-}
-
-.modo-oscuro #cartContainer h4 {
-  color: #000000;
 }

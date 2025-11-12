@@ -6,26 +6,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Render principal del carrito
     function renderCart() {
-        cartContainer.innerHTML = "";
+      cartContainer.innerHTML = "";
 
-        if (!cartItems || cartItems.length === 0) {
-            cartContainer.innerHTML = `
-                <div class="alert alert-info text-center">
-                    <i class="bi bi-cart-x fs-1 mb-3 d-block"></i>
-                    <h4>Tu carrito está vacío</h4>
-                    <p class="mb-3">Agrega algunos productos para continuar</p>
-                    <a href="index.html" class="btn btn-primary">Seguir comprando</a>
-                </div>`;
-            localStorage.removeItem("cartItems");
-            updateCostos(0);
-            return;
-        }
+      if (!cartItems || cartItems.length === 0) {
+        // Ocultar las columnas
+        const checkoutColumn = document.getElementById("checkoutColumn");
+        const cartColumn = document.getElementById("cartColumn");
+        if (checkoutColumn) checkoutColumn.style.display = "none";
+        if (cartColumn) cartColumn.style.display = "none";
 
-        cartItems.forEach((item, index) => {
-            const card = document.createElement("div");
-            card.className = "card mb-3 shadow-sm position-relative";
+        // Mostrar solo el mensaje centrado
+        const main = document.querySelector("main");
+        main.innerHTML = `
+        <div class="d-flex align-items-center justify-content-center " style="min-height: 70vh;">
+        <div class="p-3 rounded alert-info text-center" style="width: fit-content;">
+            <i class="bi bi-cart-x fs-1 mb-3 d-block"></i>
+            <h4>Tu carrito está vacío</h4>
+            <p class="mb-3">Agrega algunos productos para continuar</p>
+            <a href="index.html" class="btn btn-primary">Seguir comprando</a>
+        </div>
+        </div>`;
 
-            card.innerHTML = `
+        localStorage.removeItem("cartItems");
+        return;
+      }
+
+
+      cartItems.forEach((item, index) => {
+        const card = document.createElement("div");
+        card.className = "card mb-3 shadow-sm position-relative";
+
+        card.innerHTML = `
                 <button
                     class="btn-delete text-danger bg-transparent border-0 position-absolute"
                     title="Eliminar producto"
@@ -37,39 +48,68 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 <div class="row g-0 flex-nowrap align-items-center">
                     <div class="col-3 d-flex align-items-center pe-0">
-                        <img src="${item.images[0]}" class="img-fluid rounded-sm" alt="${item.name}" style="max-height: 120px; object-fit: cover;">
+                        <img src="${
+                          item.images[0]
+                        }" class="img-fluid rounded-sm" alt="${
+          item.name
+        }" style="max-height: 120px; object-fit: cover;">
                     </div>
 
                     <div class="col-9 ps-0 h-100">
                         <div class="card-body d-flex flex-column justify-content-between h-100">
                             <div class="d-flex justify-content-between align-items-start w-100">
-                                <h5 class="card-title mb-2 mb-md-0">${item.name}</h5>
+                                <h5 class="card-title mb-2 mb-md-0">${
+                                  item.name
+                                }</h5>
                                 <div class="text-end ms-auto">
                                     <h5 class="fw-bold mb-2 me-4">
-                                        ${item.currency === "USD" ? "$" : item.currency} ${item.cost}
+                                        ${
+                                          item.currency === "USD"
+                                            ? "$"
+                                            : item.currency
+                                        } ${item.cost}
                                     </h5>
 
                                     <div class="d-flex flex-column justify-content-end align-items-end gap-2">
                                         <div class="d-flex align-items-center">
                                             <label class="form-label me-2 mb-0">Cantidad:</label>
                                             <select class="form-select form-select-sm w-auto cantidad-select" data-index="${index}">
-                                                ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-                                                    .map(
-                                                        (n) =>
-                                                            `<option value="${n}" ${n === 1 ? "selected" : ""}>${n}</option>`
-                                                    )
-                                                    .join("")}
+                                                ${[
+                                                  1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+                                                ]
+                                                  .map(
+                                                    (n) =>
+                                                      `<option value="${n}" ${
+                                                        n === 1
+                                                          ? "selected"
+                                                          : ""
+                                                      }>${n}</option>`
+                                                  )
+                                                  .join("")}
                                             </select>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <label class="form-label me-2 mb-0">Color:</label>
                                             <select class="form-select form-select-sm w-auto color-select" data-index="${index}">
-                                                ${["rojo", "negro", "blanco", "azul", "verde"]
-                                                    .map(
-                                                        (color) =>
-                                                            `<option value="${color}" ${color === "rojo" ? "selected" : ""}>${color[0].toUpperCase() + color.slice(1)}</option>`
-                                                    )
-                                                    .join("")}
+                                                ${[
+                                                  "rojo",
+                                                  "negro",
+                                                  "blanco",
+                                                  "azul",
+                                                  "verde",
+                                                ]
+                                                  .map(
+                                                    (color) =>
+                                                      `<option value="${color}" ${
+                                                        color === "rojo"
+                                                          ? "selected"
+                                                          : ""
+                                                      }>${
+                                                        color[0].toUpperCase() +
+                                                        color.slice(1)
+                                                      }</option>`
+                                                  )
+                                                  .join("")}
                                             </select>
                                         </div>
                                     </div>
@@ -78,18 +118,22 @@ document.addEventListener("DOMContentLoaded", () => {
                             <div class="text-end mt-2">
                                 <small>Subtotal:</small>
                                 <span class="fw-bold subtotal" id="subtotal-${index}">
-                                    ${item.currency === "USD" ? "$" : item.currency} ${item.cost}
+                                    ${
+                                      item.currency === "USD"
+                                        ? "$"
+                                        : item.currency
+                                    } ${item.cost}
                                 </span>
                             </div>
                         </div>
                     </div>
                 </div>`;
 
-            cartContainer.appendChild(card);
-        });
+        cartContainer.appendChild(card);
+      });
 
-        addCartListeners();
-        updateTotal();
+      addCartListeners();
+      updateTotal();
     }
 
     function addCartListeners() {
@@ -288,34 +332,46 @@ document.addEventListener("DOMContentLoaded", () => {
     
 // Función para mostrar el resumen de compra
 function mostrarResumenCompra(compra) {
-    const resumenHTML = `
-        <div class="alert alert-success text-center" style="width: 100%; padding: 2rem;">
-            <div class="text-center mb-3">
-                <i class="bi bi-check-circle-fill text-success fs-1"></i>
-            </div>
-            <h4 class="text-center">¡Compra realizada con éxito!</h4>
-            <div class="mt-4">
+  const main = document.querySelector("main");
+  const resumenHTML = `
+  <div class="d-flex align-items-center justify-content-center " style="min-height: 100vh;">
+    <div class="rounded alert-success text-center" style="max-width: 600px; width: 100%; padding: 2rem;">
+      <div class="text-center mb-3">
+        <i class="bi bi-check-circle-fill text-success fs-1"></i>
+          </div>
+            <h4 class="text-success text-center">¡Compra realizada con éxito!</h4>
+              <div class="mt-4">
                 <p><strong>Número de pedido:</strong> ${compra.id}</p>
-                <p><strong>Total:</strong> $${compra.total.toFixed(2)} USD</p>
-                <p><strong>Dirección de envío:</strong> ${compra.direccionEnvio.calle} ${compra.direccionEnvio.numero}, ${compra.direccionEnvio.localidad}, ${compra.direccionEnvio.departamento}</p>
-                <p><strong>Tipo de envío:</strong> ${compra.tipoEnvio.nombre}</p>
-                <p><strong>Forma de pago:</strong> ${compra.formaPago}</p>
-                <p class="mt-3">Recibirás un email de confirmación en breve.</p>
+                <p><strong>Total:</strong> $${compra.total.toFixed(
+                      2
+                    )} USD</p>
+                    <p><strong>Dirección de envío:</strong> ${
+                      compra.direccionEnvio.calle
+                    } ${compra.direccionEnvio.numero}, ${
+    compra.direccionEnvio.localidad
+  }, ${compra.direccionEnvio.departamento}</p>
+                    <p><strong>Tipo de envío:</strong> ${
+                      compra.tipoEnvio.nombre
+                    }</p>
+              <p><strong>Forma de pago:</strong> ${compra.formaPago}</p>
+              <p class="mt-3">Recibirás un email de confirmación en breve.</p>
             </div>
-            <div class="text-center mt-4">
-                <a href="index.html" class="btn btn-primary">Seguir comprando</a>
-            </div>
-        </div>
+          <div class="text-center mt-4">
+        <a href="index.html" class="btn btn-primary">Seguir comprando</a>
+      </div>
+    </div>
+  </div>
     `;
-    
-    // Reemplazar solo el contenido del carrito con el resumen
-    document.getElementById('cartContainer').innerHTML = resumenHTML;
-    document.getElementById('checkoutColumn').style.display = 'none';
-    
-    // Limpiar carrito después de la compra
-    cartItems = [];
-    localStorage.removeItem('cartItems');
+
+  document.getElementById("cartContainer").style.display = "none";
+  document.getElementById("checkoutColumn").style.display = "none";
+
+  main.innerHTML = resumenHTML;
+
+  cartItems = [];
+  localStorage.removeItem("cartItems");
 }
+
 
     // ========== INICIALIZACIÓN ==========
 
