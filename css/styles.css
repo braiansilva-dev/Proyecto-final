@@ -292,7 +292,7 @@ a.custom-card:hover {
 
 /* Estilos para la sección de checkout */
 .checkout-section {
-  background-color: #f8f9fa;
+  background-color: #ffffff;
   border-radius: 0.5rem;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
@@ -322,7 +322,7 @@ a.custom-card:hover {
 }
 
 .costos-section {
-  background-color: #f8f9fa;
+  background-color: #ffffff;
   border-radius: 0.5rem;
   padding: 1.5rem;
   border: 1px solid #e9ecef;
