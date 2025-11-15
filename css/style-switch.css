@@ -6,6 +6,13 @@
   height: 34px;
 }
 
+.switch-login {
+  margin-left: auto !important; 
+  display: flex;
+  margin-right: 2%;
+  margin-top: 1%;
+}
+
 .switch input {
   opacity: 0;
   width: 0;
@@ -56,6 +63,11 @@ body.modo-oscuro {
   color: #e0e0e0 !important;
 }
 
+body.fondo-product-info {
+  background-color: #1e1e1e !important ;
+  color: #e0e0e0 !important;
+}
+
 /* --- Elementos generales --- */
 body.modo-oscuro main,
 body.modo-oscuro .container,
@@ -77,7 +89,7 @@ body.modo-oscuro label {
 
 body.modo-oscuro h4,
 body.modo-oscuro p {
-  color: #000000 !important;
+  color: #ffffff !important;
 }
 
 /* --- Inputs y formularios --- */
@@ -162,6 +174,28 @@ body.modo-oscuro .text-center {
 
 body.modo-oscuro a:hover {
   color: #99ccff !important;
+}
+
+body.modo-oscuro .producto div:last-child{
+  color: #ffffff !important;
+}
+
+body.modo-oscuro .producto{
+  border: 1px solid #333333 !important;
+}
+
+body.modo-oscuro .producto:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 8px rgba(140, 140, 140, 0.1);
+}
+
+body.modo-oscuro .producto-relacionado{
+  border: 1px solid #333333 !important;
+}
+
+body.modo-oscuro .producto-relacionado:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 8px rgba(140, 140, 140, 0.1);
 }
 
 
@@ -300,4 +334,8 @@ body.modo-oscuro #vermas:hover {
 
 body.modo-oscuro .alert.alert-info {
   color: black !important;
+}
+
+body.modo-oscuro .alert-info {
+  background-color: #296670;
 }

@@ -1,8 +1,8 @@
+let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
 document.addEventListener("DOMContentLoaded", () => {
     const cartContainer = document.getElementById("cartContainer");
 
-    // Intentar obtener del localStorage
-    let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
 
     // Render principal del carrito
     function renderCart() {
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <span class="fw-bold subtotal" id="subtotal-${index}">
                                     ${
                                       item.currency === "USD"
-                                        ? "$"
+                                        ? "USD"
                                         : item.currency
                                     } ${item.cost}
                                 </span>
@@ -145,6 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     cartItems.splice(index, 1);
                     localStorage.setItem("cartItems", JSON.stringify(cartItems));
                     renderCart();
+                    updateCartBadge();
                 }
             });
         });
@@ -158,12 +159,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const subtotal = item.cost * cantidad;
                 const subtotalElement = document.getElementById(`subtotal-${index}`);
-                subtotalElement.textContent = `${item.currency === "USD" ? "$" : item.currency} ${subtotal}`;
+                const subtotalConvertido = convertir(subtotal, item.currency, monedaSeleccionada);
+                subtotalElement.textContent = `${monedaSeleccionada} ${subtotalConvertido.toFixed(2)}`;
 
                 updateTotal();
             });
         });
     }
+
+    let monedaSeleccionada = "USD"; // por defecto
+    let USD_a_UYU = 40;
+
+    function convertir(valor, monedaOriginal, monedaDestino) {
+        if (monedaOriginal === monedaDestino) return valor;
+
+        if (monedaOriginal === "USD" && monedaDestino === "UYU") {
+            return valor * USD_a_UYU;
+        }
+
+        if (monedaOriginal === "UYU" && monedaDestino === "USD") {
+            return valor / USD_a_UYU;
+        }
+    }
+
+    // Listener para el cambio de moneda
+    document.querySelectorAll('input[name="currency"]').forEach(radio => {
+        radio.addEventListener("change", (e) => {
+            monedaSeleccionada = e.target.value;
+            updateTotal();   // recalcular todo
+            renderCart();    // recargare subtotales
+        });
+    });
+
 
     // ========== FUNCIONES DEL CHECKOUT ==========
 
@@ -183,9 +210,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const total = subtotal + costoEnvio;
             
             // Actualizar elementos
-            subtotalElement.textContent = `$${subtotal.toFixed(2)} USD`;
-            envioElement.textContent = `$${costoEnvio.toFixed(2)} USD`;
-            totalElement.textContent = `$${total.toFixed(2)} USD`;
+            subtotalElement.textContent = `${subtotal.toFixed(2)} ${monedaSeleccionada}`;
+            envioElement.textContent = `${costoEnvio.toFixed(2)} ${monedaSeleccionada}`;
+            totalElement.textContent = `${total.toFixed(2)} ${monedaSeleccionada}`;
         }
     }
     
@@ -203,7 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (cartItems[index]) {
                 const cantidad = parseInt(select.value, 10);
                 const item = cartItems[index];
-                subtotal += item.cost * cantidad;
+                subtotal += convertir(item.cost * cantidad, item.currency, monedaSeleccionada);
             }
         });
         
@@ -218,7 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.querySelectorAll(".cantidad-select").forEach((select, index) => {
                 const cantidad = parseInt(select.value, 10);
                 const item = cartItems[index];
-                subtotal += item.cost * cantidad;
+                subtotal += convertir(item.cost * cantidad, item.currency, monedaSeleccionada);
             });
         }
         
@@ -380,6 +407,9 @@ function mostrarResumenCompra(compra) {
     
     // Render inicial del carrito
     renderCart();
+
+    // Actualizar badge del carrito
+    updateCartBadge();
     
     // Inicializar costos con el subtotal inicial (no con 0)
     const subtotalInicial = calcularSubtotalInicial();
