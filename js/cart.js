@@ -345,6 +345,7 @@ document.addEventListener("DOMContentLoaded", () => {
             subtotal,
             costoEnvio,
             total,
+            moneda: monedaSeleccionada,
             fecha: new Date().toISOString(),
             id: 'PED-' + Date.now().toString()
         };
@@ -371,7 +372,7 @@ function mostrarResumenCompra(compra) {
                 <p><strong>Número de pedido:</strong> ${compra.id}</p>
                 <p><strong>Total:</strong> $${compra.total.toFixed(
                       2
-                    )} USD</p>
+                    )} ${compra.moneda}</p>
                     <p><strong>Dirección de envío:</strong> ${
                       compra.direccionEnvio.calle
                     } ${compra.direccionEnvio.numero}, ${
