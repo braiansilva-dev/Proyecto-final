@@ -39,3 +39,21 @@ let getJSONData = function(url){
         return result;
     });
 }
+
+// funcion para que se actualice el badge del carrito
+    function updateCartBadge() {
+        const badge = document.getElementById("cart-badge");
+        if (!badge) return;
+
+        const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        const total = cartItems.length;
+
+        if (total > 0) {
+            badge.textContent = total;
+            badge.style.display = "inline-block";
+        } else {
+            badge.style.display = "none";
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", updateCartBadge);

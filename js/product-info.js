@@ -310,6 +310,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
+    if (typeof updateCartBadge === "function") {
+      updateCartBadge();
+    }
+
     window.location.href = "cart.html";
   });
 

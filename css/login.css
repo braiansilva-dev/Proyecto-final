@@ -62,3 +62,23 @@ main {
 .forgot:hover {
   color: rgb(70, 70, 70);
 }
+
+
+/* === MODO OSCURO PARA EL LOGIN === */
+body.modo-oscuro .login-container{
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(140, 140, 140, 0.1);
+  border: 1px solid #333333 !important;
+}
+
+
+body.modo-oscuro .forgot {
+  color: rgb(0, 115, 255);
+  transition: color 0.2s ease;
+}
+
+body.modo-oscuro #btn-login {
+  color:white;
+  background-color: #007bff;
+  border-color: #007bff;
+}

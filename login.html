@@ -16,6 +16,8 @@
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/login.css" rel="stylesheet" />
     <link href="css/toast.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style-switch.css">
+
     <style>
       body {
         background-color: rgb(248, 249, 250);
@@ -28,13 +30,25 @@
         window.location.href = "index.html";
       }
     </script>
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery + Popper + Bootstrap 4 JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </head>
 
-  <body>
+  <body id="login-fondo">
+    <label class="switch switch-login">
+      <input type="checkbox" id="miCheckboxId">
+      <span class="slider round"></span>
+    </label>
     <h1>¡Bienvenido!</h1>
     <p>Ingrese sus datos</p>
     <main class="mt-5">
-      <div class="container">
+      <div class="container login-container">
         <form id="loginForm">
           <div>
             <label for="usuario">Usuario</label>
@@ -78,5 +92,30 @@
       <p></p>
     </div>
     <script src="js/login.js" type="module"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!--script para switch-->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const miCheckbox = document.getElementById("miCheckboxId");
+        const body = document.body;
+
+        // Aplica el modo oscuro si está guardado en localStorage
+        if (localStorage.getItem("fondo") === "1") {
+          body.classList.add("modo-oscuro");
+          miCheckbox.checked = true;
+        }
+
+        // Cuando se cambia el switch
+        miCheckbox.addEventListener("change", () => {
+          if (miCheckbox.checked) {
+            body.classList.add("modo-oscuro");
+            localStorage.setItem("fondo", "1");
+          } else {
+            body.classList.remove("modo-oscuro");
+            localStorage.setItem("fondo", "0");
+          }
+        });
+      });
+    </script>
   </body>
 </html>

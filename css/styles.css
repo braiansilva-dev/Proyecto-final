@@ -22,6 +22,11 @@ nav a {
   user-select: none;
 }
 
+.producto-relacionado:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
 @media (min-width: 768px) {
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
@@ -278,3 +283,226 @@ a.custom-card:hover {
         max-width: 600px;
         margin: 0 auto;
       }
+
+
+/** CART **/
+
+#cart-summary {
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  z-index: 10;
+  border-radius: 0.5rem;
+}
+
+/* Estilos para la sección de checkout */
+.checkout-section {
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #e9ecef;
+}
+
+.checkout-section h5 {
+  margin-bottom: 1rem;
+  color: #333;
+  font-weight: 600;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 0.5rem;
+}
+
+.checkout-section .form-check {
+  margin-bottom: 0.5rem;
+  padding-left: 2rem;
+}
+
+.checkout-section .form-check-input {
+  margin-left: -2rem;
+}
+
+.checkout-section .form-check-label {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.costos-section {
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  border: 1px solid #e9ecef;
+}
+
+.costos-section h5 {
+  margin-bottom: 1rem;
+  color: #333;
+  font-weight: 600;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 0.5rem;
+}
+
+.costos-section .costo-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.costos-section .costo-total {
+  border-top: 2px solid #dee2e6;
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #198754;
+}
+
+.btn-finalizar {
+  width: 100%;
+  padding: 0.75rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  background-color: #198754;
+  border-color: #198754;
+  transition: all 0.3s ease;
+}
+
+.btn-finalizar:hover {
+  background-color: #157347;
+  border-color: #146c43;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para los productos del carrito */
+.img-fluid{
+  margin-left: 10%;
+}
+
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.btn-delete {
+  transition: all 0.2s ease;
+}
+
+.btn-delete:hover {
+  transform: scale(1.1);
+}
+
+.form-select {
+  border: 1px solid #ced4da;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-select:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.form-control {
+  border: 1px solid #ced4da;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Centrado en pantallas pequeñas */
+@media (max-width: 991px) {
+  #cart-summary {
+    margin: 1rem auto;
+    text-align: center;
+  }
+  
+  .checkout-section,
+  .costos-section {
+    margin-bottom: 1rem;
+  }
+}
+
+/* A la derecha en pantallas grandes */
+@media (min-width: 992px) {
+  #cart-summary {
+    margin-left: auto;
+    margin-right: 0;
+    width: 320px;
+  }
+  
+  #checkoutColumn {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+  }
+}
+
+
+/* Estilos para el modo oscuro */
+.modo-oscuro .checkout-section,
+.modo-oscuro .costos-section {
+  background-color: #2d3748;
+  border-color: #333;
+  color: #e2e8f0;
+}
+
+.modo-oscuro .checkout-section h5,
+.modo-oscuro .costos-section h5 {
+  color: #e2e8f0;
+  border-bottom-color: #4a5568;
+}
+
+.modo-oscuro .form-control,
+.modo-oscuro .form-select {
+  background-color: #4a5568;
+  border-color: #718096;
+  color: #e2e8f0;
+}
+
+.modo-oscuro .form-control:focus,
+.modo-oscuro .form-select:focus {
+  background-color: #4a5568;
+  border-color: #63b3ed;
+  box-shadow: 0 0 0 0.25rem rgba(99, 179, 237, 0.25);
+  color: #e2e8f0;
+}
+
+.modo-oscuro .form-check-label {
+  color: #e2e8f0;
+}
+
+.modo-oscuro main .alert-info {
+  color: #000000 !important;
+}
+.modo-oscuro main .alert-info i {
+  color: #000000 !important;
+}
+
+/* Modo oscuro para el mensaje de compra exitosa */
+.modo-oscuro main .alert-success {
+    color: #000000 !important;
+    background-color: #98bda1;
+    border-color: #c3e6cb;
+}
+
+.modo-oscuro main .alert-success p,
+.modo-oscuro main .alert-success strong {
+    color: #000000 !important;
+}
+
+.modo-oscuro main h4.text-success,
+.modo-oscuro main .alert-success .text-success {
+    color: #1b8a11 !important;
+}
+
+/* Botón con letras negras pero manteniendo el azul de fondo */
+.modo-oscuro main .alert-success .btn-primary {
+    color: #000000 !important;
+}
