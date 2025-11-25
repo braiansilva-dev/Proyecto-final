@@ -1,0 +1,28 @@
+{
+  "name": "proyecto-final",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/braiansilva-dev/Proyecto-final.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/braiansilva-dev/Proyecto-final/issues"
+  },
+  "homepage": "https://github.com/braiansilva-dev/Proyecto-final#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mariadb": "^3.4.5",
+    "nodemon": "^3.1.11",
+    "path": "^0.12.7"
+  }
+}
