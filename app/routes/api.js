@@ -24,7 +24,7 @@ router.get('/user_cart/:id', jwtMiddleware.verifyToken, cartController.getUserCa
 router.get('/cart/buy', cartController.getBuy);
 router.get('/sell/publish', cartController.getPublish);
 
-// Auth
+// Auth (USAR SOLO ESTOS)
 router.post('/login', authController.login);
 router.post('/logout', authController.logout);
 

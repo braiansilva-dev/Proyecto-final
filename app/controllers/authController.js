@@ -1,69 +1,36 @@
 const jwt = require('jsonwebtoken');
-const fs = require('fs');
-const path = require('path');
-
 const SECRET = process.env.JWT_SECRET || 'secret123';
 
-// Regex para validar usuario y contraseña
-const usuarioValido = /^(?:[a-zA-Z0-9._-]{3,}|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
-const passwordValida = /^[a-zA-Z0-9._-]{6,}$/;
+const USERS = [
+    { username: 'admin', password: '1234' },
+    { username: 'justin', password: 'pass123' }
+];
 
-// Endpoint de login: valida con regex y guarda JWT en cookie httpOnly
-async function login(req, res) {
-  const { usuario, contrasena } = req.body || {};
+function login(req, res) {
+    const { username, password } = req.body;
 
-  if (!usuario || !contrasena) {
-    return res.status(400).json({ error: 'Faltan credenciales' });
-  }
+    if (!username || !password) {
+        return res.status(400).json({ error: 'Faltan datos' });
+    }
 
-  // Validar formato de usuario y contraseña con regex
-  if (!usuarioValido.test(usuario)) {
-    return res.status(400).json({ error: 'Formato de usuario inválido. Debe tener al menos 3 caracteres alfanuméricos o ser un email válido' });
-  }
+    // Buscar usuario en la "base de datos" depende si quiero agregar o no ananan
+    const user = USERS.find(u => u.username === username && u.password === password);
 
-  if (!passwordValida.test(contrasena)) {
-    return res.status(400).json({ error: 'Formato de contraseña inválido. Debe tener al menos 6 caracteres alfanuméricos' });
-  }
+    if (!user) {
+        return res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
+    }
 
-  try {
-    // Generar un ID único para el usuario (basado en timestamp y hash simple)
-    const userId = Date.now().toString() + Math.random().toString(36).substr(2, 9);
-
-    // Guardar datos en users.json
-    const usersFilePath = path.join(__dirname, '..', 'json', 'users.json');
-
-    const users = require(usersFilePath);
-    fs.writeFileSync(usersFilePath, JSON.stringify([...users, { user: usuario, id: userId }], null, 2));
-    
-    // Crear payload con información del usuario
-    const payload = { 
-      user: usuario, 
-      id: userId 
-    };
-    
-    // Generar token JWT
-    const token = jwt.sign(payload, SECRET, { expiresIn: '2h' });
-
-    // Guardar token en cookie httpOnly (segura, no accesible desde JavaScript)
-    res.cookie('token', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // Solo HTTPS en producción
-      sameSite: 'strict',
-      maxAge: 2 * 60 * 60 * 1000 // 2 horas
-    });
-
-    // Enviar respuesta con datos del usuario (sin el token)
-    res.json({ success: true, user: payload });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Error interno al generar token' });
-  }
+    // Crear token
+    const token = jwt.sign(
+        { username: user.username },
+        SECRET
+    );
+    return res.json({ message: 'Login exitoso', token });
 }
 
-// Endpoint de logout: eliminar cookie
 function logout(req, res) {
-  res.clearCookie('token');
-  res.json({ success: true, message: 'Sesión cerrada correctamente' });
+    res.clearCookie('token');
+    return res.json({ message: 'Logout exitoso' });
 }
 
 module.exports = { login, logout };
