@@ -1,4 +1,6 @@
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
+const path = require('path');
 
 const SECRET = process.env.JWT_SECRET || 'secret123';
 
@@ -28,9 +30,10 @@ async function login(req, res) {
     const userId = Date.now().toString() + Math.random().toString(36).substr(2, 9);
 
     // Guardar datos en users.json
-    const users = require('../json/users.json');
-    users.push({ user: usuario, password: contrasena, id: userId });
-    require('fs').writeFileSync('./json/users.json', JSON.stringify(users));
+    const usersFilePath = path.join(__dirname, '..', 'json', 'users.json');
+
+    const users = require(usersFilePath);
+    fs.writeFileSync(usersFilePath, JSON.stringify([...users, { user: usuario, id: userId }], null, 2));
     
     // Crear payload con información del usuario
     const payload = { 
@@ -52,6 +55,7 @@ async function login(req, res) {
     // Enviar respuesta con datos del usuario (sin el token)
     res.json({ success: true, user: payload });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: 'Error interno al generar token' });
   }
 }

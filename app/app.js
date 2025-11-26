@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
     if (checkToken(req)) {
         return res.redirect('/index');
     }
-    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+    res.sendFile(path.join(__dirname, 'pages', 'login.html'));
 });
 
 app.get('/login', (req, res) => {
@@ -49,7 +49,7 @@ app.get('/login', (req, res) => {
     if (checkToken(req)) {
         return res.redirect('/index');
     }
-    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+    res.sendFile(path.join(__dirname, 'pages', 'login.html'));
 });
 
 // Rutas protegidas (requieren autenticación) - DEBEN ir ANTES de express.static
@@ -66,7 +66,7 @@ const protectedPages = {
 // Configurar rutas protegidas para cada página
 Object.keys(protectedPages).forEach(route => {
     app.get(route, verifyTokenPage, (req, res) => {
-        res.sendFile(path.join(__dirname, 'public', protectedPages[route]));
+        res.sendFile(path.join(__dirname, 'pages', protectedPages[route]));
     });
 });
 
