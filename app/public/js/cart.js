@@ -445,20 +445,4 @@ function mostrarResumenCompra(compra) {
             localStorage.setItem("fondo", "0");
         }
     });
-
-    const usersData = JSON.parse(localStorage.getItem("usersData")) || {};
-    const currentUser = localStorage.getItem("currentUser");
-    const userDataFromToken = JSON.parse(localStorage.getItem("userData")) || {};
-    const nombreUsuarioEl = document.getElementById("nombreUsuario");
-    
-    if (nombreUsuarioEl) {
-        if (currentUser && usersData[currentUser]) {
-            const userData = usersData[currentUser];
-            nombreUsuarioEl.innerText = userData.user || userData.email || "Usuario";
-        } else if (userDataFromToken && userDataFromToken.user) {
-            nombreUsuarioEl.innerText = userDataFromToken.user;
-        } else {
-            nombreUsuarioEl.innerText = "Usuario";
-        }
-    }
 });
